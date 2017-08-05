@@ -2,6 +2,7 @@ package com.tunnll.kedditbysteps.feature.news.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import com.tunnll.kedditbysteps.R
 import com.tunnll.kedditbysteps.commons.RedditNewsItem
 import com.tunnll.kedditbysteps.commons.adapter.ViewType
@@ -28,7 +29,7 @@ class NewsDelegateAdapter : ViewTypeDelegateAdapter {
         fun bind(item: RedditNewsItem) = with(itemView) {
             //Picasso.with(itemView.context).load(item.thumbnail).into(img_thumbnail)
             img_thumbnail.loadImg(item.thumbnail)
-            //description.text = item.title
+            description.text = item.title
             author.text = item.author
             comments.text = "${item.numComments} comments"
             time.text = item.created.getFriendlyTime()
