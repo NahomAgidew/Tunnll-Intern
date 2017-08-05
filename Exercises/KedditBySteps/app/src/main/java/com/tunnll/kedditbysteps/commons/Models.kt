@@ -3,6 +3,11 @@ package com.tunnll.kedditbysteps.commons
 import com.tunnll.kedditbysteps.commons.adapter.AdapterConstants
 import com.tunnll.kedditbysteps.commons.adapter.ViewType
 
+data class RedditNews(
+        val after: String,
+        val before: String,
+        val news: List<RedditNewsItem>)
+
 data class RedditNewsItem(
         val author: String,
         val title: String,

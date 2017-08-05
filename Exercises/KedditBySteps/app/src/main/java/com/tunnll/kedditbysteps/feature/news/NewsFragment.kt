@@ -9,6 +9,8 @@ import android.view.View
 import kotlinx.android.synthetic.main.news_fragment.*
 import android.view.ViewGroup
 import com.tunnll.kedditbysteps.R
+import com.tunnll.kedditbysteps.commons.InfiniteScrollListener
+import com.tunnll.kedditbysteps.commons.RedditNews
 import com.tunnll.kedditbysteps.commons.RxBaseFragment
 import com.tunnll.kedditbysteps.commons.extensions.inflate
 import com.tunnll.kedditbysteps.feature.news.adapter.NewsAdapter
@@ -17,6 +19,7 @@ import rx.schedulers.Schedulers
 
 class NewsFragment : RxBaseFragment() {
 
+    private var redditNews: RedditNews? = null
     private val newsManager by lazy { NewsManager() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,6 +31,10 @@ class NewsFragment : RxBaseFragment() {
 
         news_list.setHasFixedSize(true)
         news_list.layoutManager = LinearLayoutManager(context)
+        val linearLayout = LinearLayoutManager(context)
+        news_list.layoutManager = linearLayout
+        news_list.clearOnScrollListeners()
+        news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
         initAdapter()
 
         if (savedInstanceState == null) {
@@ -36,12 +43,13 @@ class NewsFragment : RxBaseFragment() {
     }
 
     private fun requestNews() {
-        val subscription = newsManager.getNews()
+        val subscription = newsManager.getNews(redditNews?.after ?: "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { retrievedNews ->
-                            (news_list.adapter as NewsAdapter).addNews(retrievedNews)
+                            redditNews = retrievedNews
+                            (news_list.adapter as NewsAdapter).addNews(retrievedNews.news)
                         },
                         { e ->
                             Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
