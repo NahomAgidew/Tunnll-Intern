@@ -1,11 +1,13 @@
 package com.tunnll.kedditbysteps.feature.news
 
+import com.tunnll.kedditbysteps.api.NewsAPI
+import com.tunnll.kedditbysteps.api.NewsRestAPI
 import com.tunnll.kedditbysteps.api.RestAPI
 import com.tunnll.kedditbysteps.commons.RedditNews
 import com.tunnll.kedditbysteps.commons.RedditNewsItem
 import rx.Observable
 
-class NewsManager(private val api: RestAPI = RestAPI()) {
+class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
 
     fun getNews(after: String, limit: String = "10"): Observable<RedditNews> {
         return Observable.create{
