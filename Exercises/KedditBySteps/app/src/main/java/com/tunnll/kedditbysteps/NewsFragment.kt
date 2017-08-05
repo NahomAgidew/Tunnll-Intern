@@ -8,19 +8,41 @@ import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.news_fragment.*
 import android.view.ViewGroup
-import com.tunnll.kedditbysteps.commons.inflate
+import com.tunnll.kedditbysteps.commons.RedditNewsItem
+import com.tunnll.kedditbysteps.commons.extensions.inflate
+import com.tunnll.kedditbysteps.feature.news.adapter.NewsAdapter
 
 class NewsFragment : Fragment() {
-    private var newsList: RecyclerView by lazy {
-        news_list
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return container?.inflate(R.layout.news_fragment)
+    }
 
-        val view = container?.inflate(R.layout.news_fragment)
-        newsList.setHasFixedSize(true)
-        newsList.layoutManager = LinearLayoutManager(context)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        news_list.setHasFixedSize(true)
+        news_list.layoutManager = LinearLayoutManager(context)
+        initAdapter()
 
-        return view
+        if (savedInstanceState == null) {
+            val news = mutableListOf<RedditNewsItem>()
+            for (i in 1..10) {
+                news.add(RedditNewsItem(
+                        "author$i",
+                        "Title $i",
+                        i,
+                        1457207701L - i * 200,
+                        "http://lorempixel.com/200/200/technics/$i",
+                        "url"
+                ))
+            }
+            (news_list.adapter as NewsAdapter).addNews(news)
+        }
+    }
+
+    private fun initAdapter() {
+        if (news_list.adapter == null) {
+            news_list.adapter = NewsAdapter()
+        }
     }
 }
