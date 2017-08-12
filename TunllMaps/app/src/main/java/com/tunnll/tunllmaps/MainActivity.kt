@@ -109,5 +109,13 @@ class MainActivity : AppCompatActivity(), LocationListener {
         locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, this)
     }
 
+    /**
+     * Set user agent to prevent getting banned from the osm servers.
+     * @return Unit
+     */
+    private fun setupMapUserAgent() {
+        val ctx = applicationContext
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
+    }
 
 }
