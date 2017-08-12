@@ -129,4 +129,17 @@ class MainActivity : AppCompatActivity(), LocationListener {
         map.setMultiTouchControls(true)
     }
 
+    /**
+     * Sets the zoom level and center of the map.
+     * @param currentPos Location Coordinates
+     * @return Unit
+     */
+    private fun updateMapLocation(currentPos: GeoPoint) {
+        val mapController = map.controller
+        mapController.setZoom(mapZoomLevel)
+        mapController.setCenter(currentPos)
+
+        renderLocationIcon(currentPos)
+    }
+
 }
