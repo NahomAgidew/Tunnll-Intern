@@ -142,4 +142,29 @@ class MainActivity : AppCompatActivity(), LocationListener {
         renderLocationIcon(currentPos)
     }
 
+    /**
+     * Renders an icon on the given location.
+     * @param newLocation Location Coordinates
+     * @return Unit
+     */
+    private fun renderLocationIcon(newLocation: GeoPoint) {
+        var items = arrayListOf<OverlayItem>()
+        items.add(OverlayItem("", "", newLocation))
+
+        val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(items,
+                object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+                    override fun onItemSingleTapUp(index: Int, item: OverlayItem): Boolean {
+                        //do something
+                        return true
+                    }
+
+                    override fun onItemLongPress(index: Int, item: OverlayItem): Boolean {
+                        return false
+                    }
+                }, this)
+
+        map.overlays.clear()
+        map.overlays.add(mOverlay)
+    }
+
 }
