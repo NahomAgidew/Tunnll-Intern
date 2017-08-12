@@ -103,4 +103,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private fun getCurrentLocation() {
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as? LocationManager
+        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, this)
+    }
+
+
 }
