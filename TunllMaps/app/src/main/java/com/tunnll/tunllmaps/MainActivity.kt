@@ -118,4 +118,15 @@ class MainActivity : AppCompatActivity(), LocationListener {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
     }
 
+    /**
+     * Map initialization.
+     * @return Unit
+     */
+    private fun setupMap() {
+        map.setUseDataConnection(false)
+        map.setTileSource(TileSourceFactory.MAPNIK)
+        map.setBuiltInZoomControls(true)
+        map.setMultiTouchControls(true)
+    }
+
 }
