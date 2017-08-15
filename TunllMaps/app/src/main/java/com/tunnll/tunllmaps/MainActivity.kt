@@ -32,15 +32,6 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class MainActivity : AppCompatActivity(), LocationListener {
 
-    val requiredPermissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-    val permissionRequestCode = 1234
-    val minTime: Long = 2000
-    val minDistance = 10.0F
-    val mapZoomLevel = 15
-
-    val mockLocation = GeoPoint(47.80520393, -122.29407594)
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +43,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         setupMap()
 
-        updateMapLocation(mockLocation)
+        // updateMapLocation(mockLocation)
 
         fab.setOnClickListener {
             finish()
@@ -74,12 +65,12 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location?) {
         var newLocation = GeoPoint(location!!.latitude, location!!.longitude)
 
-        //updateMapLocation(newLocation)
+        updateMapLocation(newLocation)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == permissionRequestCode) {
+        if(requestCode == Config.permissionRequestCode) {
             if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getCurrentLocation()
             } else {
@@ -97,7 +88,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
      */
     private fun requestLocationPermission() {
         if(!permissionsGranted()) {
-            requestPermissions(this, requiredPermissions, permissionRequestCode)
+            requestPermissions(this, Config.requiredPermissions, Config.permissionRequestCode)
         } else {
             getCurrentLocation()
         }
@@ -106,7 +97,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     @SuppressLint("MissingPermission")
     private fun getCurrentLocation() {
         var locationManager = getSystemService(Context.LOCATION_SERVICE) as? LocationManager
-        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, this)
+        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, Config.minTime, Config.minDistance, this)
     }
 
     /**
@@ -123,7 +114,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
      * @return Unit
      */
     private fun setupMap() {
-        map.setUseDataConnection(false)
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(true)
         map.setMultiTouchControls(true)
@@ -136,7 +126,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
      */
     private fun updateMapLocation(currentPos: GeoPoint) {
         val mapController = map.controller
-        mapController.setZoom(mapZoomLevel)
+        mapController.setZoom(Config.mapZoomLevel)
         mapController.setCenter(currentPos)
 
         renderLocationIcon(currentPos)
@@ -147,7 +137,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
      * @param newLocation Location Coordinates
      * @return Unit
      */
-    private fun renderLocationIcon(newLocation: GeoPoint) {
+    fun renderLocationIcon(newLocation: GeoPoint): ArrayList<OverlayItem> {
         var items = arrayListOf<OverlayItem>()
         items.add(OverlayItem("", "", newLocation))
 
@@ -165,6 +155,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         map.overlays.clear()
         map.overlays.add(mOverlay)
+
+        return items
     }
 
 }
