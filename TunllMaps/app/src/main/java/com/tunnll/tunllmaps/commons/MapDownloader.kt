@@ -1,11 +1,13 @@
 package com.tunnll.tunllmaps.commons
 
+import android.content.Context
 import android.util.Log
+import com.google.firebase.FirebaseApp
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class MapDownloader {
+class MapDownloader(context: Context) {
 
     val mapDirectory = File(Config.mapDirectory)
 
@@ -13,6 +15,7 @@ class MapDownloader {
     var mapReference: StorageReference? = null
 
     init {
+        FirebaseApp.initializeApp(context)
         createMapDirectory()
 
         firebaseStorage = FirebaseStorage.getInstance()
@@ -25,8 +28,8 @@ class MapDownloader {
         }
     }
 
-    fun downloadMap(): Boolean {
-        val localMapFile = File(Config.localMapFileName)
+    fun downloadMap(localMapFileName: String = Config.localMapFileName): Boolean {
+        val localMapFile = File(localMapFileName)
         var ret = false
 
         if(localMapFile.exists()) {

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.google.firebase.FirebaseApp
 import com.tunnll.tunllmaps.commons.Config
 import com.tunnll.tunllmaps.commons.MapDownloader
 
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
      * @return Unit
      */
     private fun setupMap() {
-        val mapDownloader = MapDownloader()
+        val mapDownloader = MapDownloader(context = applicationContext)
         mapDownloader.downloadMap()
 
         map.setTileSource(TileSourceFactory.MAPNIK)
