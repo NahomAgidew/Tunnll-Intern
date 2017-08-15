@@ -3,11 +3,9 @@ package com.tunnll.tunllmaps
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Assert.*
-import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
 import org.osmdroid.util.GeoPoint
 import org.robolectric.Robolectric
-import org.robolectric.RuntimeEnvironment
 
 @RunWith(MockitoJUnitRunner::class)
 class MainActivityUnitTest {

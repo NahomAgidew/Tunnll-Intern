@@ -3,7 +3,6 @@ package com.tunnll.tunllmaps
 import com.tunnll.tunllmaps.commons.MapDownloader
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowEnvironment
 import org.junit.Assert.*

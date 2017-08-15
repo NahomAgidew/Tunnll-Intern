@@ -2,6 +2,7 @@ package com.tunnll.tunllmaps.commons
 
 import android.Manifest
 import android.os.Environment
+import org.osmdroid.util.GeoPoint
 
 object Config {
     val requiredPermissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -12,6 +13,6 @@ object Config {
     val mapTileName = "tiles.zip"
     val mapDirectory = Environment.getExternalStorageDirectory().absolutePath + "/osmdroid"
     val localMapFileName = mapDirectory + "/" + mapTileName
-
-    // val mockLocation = GeoPoint(47.80520393, -122.29407594)
+    //a point int Mountlake Terrace, WA, USA
+    val mockLocation = GeoPoint(47.80520393, -122.29407594)
 }

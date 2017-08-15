@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.google.firebase.FirebaseApp
 import com.tunnll.tunllmaps.commons.Config
 import com.tunnll.tunllmaps.commons.MapDownloader
 
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         setupMap()
 
-        // updateMapLocation(mockLocation)
+        // for mocking purposes
+        updateMapLocation(Config.mockLocation)
 
         fab.setOnClickListener {
             finish()
@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onLocationChanged(location: Location?) {
         var newLocation = GeoPoint(location!!.latitude, location!!.longitude)
 
-        updateMapLocation(newLocation)
+        // for real-time update
+        //updateMapLocation(newLocation)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -144,7 +145,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(items,
                 object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
                     override fun onItemSingleTapUp(index: Int, item: OverlayItem): Boolean {
-                        //do something
                         return true
                     }
 

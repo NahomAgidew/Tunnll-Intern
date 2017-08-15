@@ -1,7 +1,6 @@
 package com.tunnll.tunllmaps.commons
 
 import android.content.Context
-import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -36,9 +35,9 @@ class MapDownloader(context: Context) {
             ret = true
         }
 
-        val localFile = File.createTempFile("tiles", "zip")
+        val localTempFile = File.createTempFile("tiles", "zip")
 
-        mapReference?.getFile(localFile)?.addOnSuccessListener{
+        mapReference?.getFile(localTempFile)?.addOnSuccessListener{
             ret = true
         }?.addOnFailureListener{
             ret = false
