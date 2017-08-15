@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "249113454335",
+    "firebase_url": "https://tunnllmaps.firebaseio.com",
+    "project_id": "tunnllmaps",
+    "storage_bucket": "tunnllmaps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249113454335:android:7232b4c88d73497f",
+        "android_client_info": {
+          "package_name": "com.tunnll.tunllmaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249113454335-3gjvadc97dmc9bn6va226oe9vjmqhqgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMGubX_ahbvvzCA89LTXI_TmvWi5c4xwE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,19 +15,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.tunnll.tunllmaps.commons.Config
+import com.tunnll.tunllmaps.commons.MapDownloader
 
-import kotlinx.android.synthetic.main.activity_main.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.api.IMapController
-import org.osmdroid.tileprovider.tilesource.XYTileSource
 import org.osmdroid.views.overlay.ItemizedIconOverlay
-import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
-import org.osmdroid.views.overlay.ItemizedOverlay
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
 import org.osmdroid.views.overlay.OverlayItem
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 class MainActivity : AppCompatActivity(), LocationListener {
@@ -114,6 +110,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
      * @return Unit
      */
     private fun setupMap() {
+        val mapDownloader = MapDownloader()
+        mapDownloader.downloadMap()
+
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(true)
         map.setMultiTouchControls(true)
